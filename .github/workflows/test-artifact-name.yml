@@ -19,7 +19,7 @@ jobs:
         run: echo "Do setup"
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - uses: ./
         id: writer
@@ -31,12 +31,12 @@ jobs:
             result: ${{ matrix.target }}
             test: existing_value
 
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: ${{ matrix.target }}
           actual: ${{ fromJson(steps.writer.outputs.result).result }}
 
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: existing_value
           actual: ${{ fromJson(steps.writer.outputs.result).test }}
@@ -51,7 +51,7 @@ jobs:
         run: echo "Do setup"
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - uses: ./
         id: writer
@@ -63,12 +63,12 @@ jobs:
             result: ${{ matrix.target }}
             test: existing_value
 
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: ${{ matrix.target }}
           actual: ${{ fromJson(steps.writer.outputs.result).result }}
 
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: existing_value
           actual: ${{ fromJson(steps.writer.outputs.result).test }}
@@ -78,7 +78,7 @@ jobs:
     continue-on-error: true
     needs: [setup]
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
 
       - id: current
         run: |-
@@ -92,12 +92,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: '4'
           actual: "${{ needs.test.outputs.result }}"
 
-      - uses: nick-fields/assert-action@v2
+      - uses: nick-fields/assert-action@v3.0.0
         with:
           expected: 'success'
           actual: "${{ needs.test.outputs.outcome }}"
